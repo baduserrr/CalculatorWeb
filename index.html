@@ -6,6 +6,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <title>Utility</title>
+    <style>
+      .overlayfix {
+        padding-top: 45px;
+      }
+    </style>
   </head>
   <body class="bg-light text-dark">
     <div class="container-fluid">
@@ -32,27 +37,56 @@
         </div>
       </div>
       <!-- Main Body -->
-      <div class="row">
+      <div class="row overlayfix">
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <!-- Home Tab -->
+          <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div style="height:200px"></div>
             <div class="col d-grid d-md-flex gap-3 justify-content-md-evenly">
               <button type="button" class="btn btn-dark btn-lg"><img src=imgs/logo.png style="width:150px"></button>
               <button type="button" class="btn btn-dark btn-lg"><img src=imgs/logo.png style="width:150px"></button>
             </div>
           </div>
-          <div class="tab-pane fade" id="nav-name" role="tabpanel" aria-labelledby="nav-name-tab">
-            <div class="row justify-content-center">
-              <div class="col-8-lg bg-dark">
-                
+          <!-- Name Picker Tab -->
+          <div class="tab-pane fade show active" id="nav-name" role="tabpanel" aria-labelledby="nav-name-tab">
+            <form class="row">
+              <div class="col">
+                <label for="NamesV" class="form-label"><b>Names</b></label>
+                <textarea id="namesv" class="form-control" placeholder="Asbun&#10;Badu&#10;Malkovich&#10;Putin" rows="15"></textarea>
+              </div>
+              <div class="col">
+                <p class="mb-2"><b>Options</b></p>
+                <div class="form-floating mb-3">
+                  <input id="groupv" class="form-control" type="text" placeholder="Insert number of desired groups">
+                  <label for="groupv">Number Of Groups</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input id="peoplev" class="form-control" type="text" placeholder="Insert number of desired peoples">
+                  <label for="peoplev">Number Of Peoples</label>
+                </div>
+              </div>
+              <div class="col">
+                <label for="Result" class="form-label"><b>Result</b></label>
+                <textarea id="ResultBox" class="form-control" rows="15" readonly></textarea>
+              </div>
+            </form>
+            <div class="row">
+              <div style="margin-bottom:30px"></div>
+              <div class="col d-grid d-md-flex gap-1 justify-content-md-center">
+                <button onclick="Counting()" type="button" class="btn btn-success">Start</button>
+                <button type="button" class="btn btn-danger">Reset</button>
               </div>
             </div>
           </div>
+          <!-- Aspect Ratio Tab -->
           <div class="tab-pane fade" id="nav-aspect" role="tabpanel" aria-labelledby="nav-aspect-tab">P</div>
         </div>
       </div>
       <!-- Content -->
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="javscript.js"></script>
   </body>
 </html>
