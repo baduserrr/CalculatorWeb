@@ -10,8 +10,17 @@
       .overlayfix {
         padding-top: 25px;
       }
-      .bg-abitdark {
-        background-color: #c8c8c8;
+      .bg-warna1 {
+        background-color: #e9ecef;
+      }
+      .bg-warna2 {
+        background-color: #9aa8ab;
+      }
+      .w-xl {
+        width: 170px;
+      }
+      .borderfix {
+        border-radius: 35px;
       }
     </style>
   </head>
@@ -20,7 +29,7 @@
       <!-- Header -->
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <nav class="navbar mt-2 border border-5 border-primary rounded-pill border-md-0 navbar-expand-lg navbar-dark bg-dark">
+          <nav class="navbar navbar-expand-lg mt-2 border border-3 borderfix border-md-0 border-primary navbar-dark bg-dark">
             <div class="container">
               <a class="navbar-brand" href="index.html">
                 <img src="imgs/logo.png" alt="" width="40" height="40">
@@ -46,20 +55,20 @@
           <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div style="height:200px"></div>
             <div class="col d-grid d-md-flex gap-3 justify-content-md-evenly">
-              <button type="button" class="btn btn-dark btn-lg"><img src=imgs/logo.png style="width:150px"></button>
-              <button type="button" class="btn btn-dark btn-lg"><img src=imgs/logo.png style="width:150px"></button>
+              <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
+              <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
             </div>
           </div>
           <!-- Name Picker Tab -->
           <div class="tab-pane fade show active" id="nav-name" role="tabpanel" aria-labelledby="nav-name-tab">
             <div class="row row-cols-lg-3 row-cols-md-1">
               <!-- Name Input -->
-              <div class="col">
+              <div class="col-lg-4 mb-3 h-100">
                 <label for="NamesV" class="form-label"><b>Names</b></label>
                 <textarea id="namesv" class="form-control" placeholder="Asbun&#10;Badu&#10;Malkovich&#10;Putin" rows="15"></textarea>
               </div>
               <!-- Option Setting -->
-              <div class="col">
+              <div class="col-lg-4">
                 <p class="mb-2"><b>Options</b></p>
                 <div class="row">
                   <div class="col mb-3">
@@ -78,11 +87,11 @@
                   <div class="col" id="def_opt">
                     <div class="form-floating mb-3">
                       <input id="groupv" class="form-control" type="text" placeholder="Insert number of desired groups" disabled>
-                      <label for="groupv">Number Of Groups</label>
+                      <label for="groupv">Number of groups</label>
                     </div>
                     <div class="form-floating mb-3">
                       <input id="peoplev" class="form-control" type="text" placeholder="Insert number of desired peoples">
-                      <label for="peoplev">Number Of Peoples</label>
+                      <label for="peoplev">Number of peoples</label>
                     </div>
                   </div>
                   <!-- Uneven Option -->
@@ -100,14 +109,15 @@
                 </div>
               </div>
               <!-- Result -->
-              <div class="col">
+              <div class="col-lg-4 mb-5">
                 <label for="Result" class="form-label"><b>Result</b></label>
-                <div class="card bg-abitdark h-100">
-                  <div id="ResultBox" class="card-body pt-2 pl-0"></div>
-                  <div class="card-footer d-grid d-md-flex gap-1 justify-content-md-center">
+                <div class="card bg-warna1 h-100">
+                  <div class="card-header bg-warna2 d-grid d-md-flex gap-2 justify-content-md-center">
                     <button onclick="counting()" type="button" class="btn btn-success">Start</button>
                     <button type="button" class="btn btn-danger">Reset</button>
+                    <button type="button" class="btn btn-warning">Copy</button>
                   </div>
+                  <div id="ResultBox" class="card-body pt-2 pl-0"></div>
                 </div>
               </div>
             </div>

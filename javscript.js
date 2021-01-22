@@ -83,7 +83,7 @@ function counting() {
 
   if (document.getElementById('uneven_ck').checked) {
     cntmode = 5
-    // al_ert('mode = ' + cntmode)
+    // al_ert'mode = ' + cntmode)
     // this one is for uneven groups
     // ======================================================================
   } else {
@@ -99,7 +99,7 @@ function counting() {
         //   if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
         //     var ads = 0
         //     var leftover = (grp_auto * ppl) - maxname
-        //     // al_ert('remove ' + leftover + ' person')
+        //     // al_ert'remove ' + leftover + ' person')
         //     for (var xxx = 0; xxx < leftover; xxx++) {
         //       if (leftover >= 1) {
         //         for (var xx = 0; xx < grp_auto; xx++) {
@@ -120,7 +120,7 @@ function counting() {
         //   } else {
         //     var ads = 0
         //     var leftover = maxname - (grp_auto * ppl)
-        //     // al_ert('add ' + leftover + ' person')
+        //     // al_ert'add ' + leftover + ' person')
         //     for (var xxx = 0; xxx < leftover; xxx++) {
         //       for (var xx = 0; xx < grp_auto; xx++) {
         //         if (leftover >= 1) {
@@ -183,10 +183,10 @@ function counting() {
         // }
         // ======================================================================
         cntmode = 3
-        // al_ert('mode = ' + cntmode)
+        // al_ert'mode = ' + cntmode)
       } else {
         cntmode = 1
-        // al_ert('mode = ' + cntmode)
+        // al_ert'mode = ' + cntmode)
         // this one is for people only
         if (maxname > ppl) {
           remove_counting()
@@ -197,7 +197,7 @@ function counting() {
           if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
             var ads = 0
             var leftover = (grp_auto * ppl) - maxname
-            // al_ert('remove ' + leftover + ' person')
+            // al_ert'remove ' + leftover + ' person')
             for (var xxx = 0; xxx < leftover; xxx++) {
               ads = ads + 1
               var namesum = maxname
@@ -227,7 +227,7 @@ function counting() {
             var ads = 0
             var leftover = maxname - (grp_auto * ppl)
             grp_auto = grp_auto + 1
-            // al_ert('add ' + leftover + ' person')
+            // al_ert'add ' + leftover + ' person')
             for (var xxx = 0; xxx < leftover; xxx++) {
               ads = ads + 1
               var namesum = maxname
@@ -301,19 +301,20 @@ function counting() {
       }
     } else if (grp >= 1 && grp != "") {
       cntmode = 2
-      // al_ert('mode = ' + cntmode)
+      // al_ert'mode = ' + cntmode)
       // this one is for group only
       if (maxname > grp) {
         remove_counting()
         var ppl = Math.round(maxname / grp)
         var grp_auto = grp
+        console.log(grp_auto + ' group with ' + ppl + ' people');
         var ctr = 0
         var people_in_groups = []
 
         if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
           var ads = 0
           var leftover = (grp_auto * ppl) - maxname
-          // al_ert('remove ' + leftover + ' person')
+          // al_ert'remove ' + leftover + ' person')
           for (var xxx = 0; xxx < leftover; xxx++) {
             ads = ads + 1
             var namesum = maxname
@@ -342,8 +343,7 @@ function counting() {
         } else {
           var ads = 0
           var leftover = maxname - (grp_auto * ppl)
-          grp_auto = grp_auto + 1
-          // al_ert('add ' + leftover + ' person')
+          // al_ert'add ' + leftover + ' person')
           for (var xxx = 0; xxx < leftover; xxx++) {
             ads = ads + 1
             var namesum = maxname
@@ -416,7 +416,7 @@ function counting() {
       // ======================================================================
     } else {
       cntmode = 4
-      // al_ert('mode = ' + cntmode)
+      // al_ert'mode = ' + cntmode)
       // this one is for if both group and people has no value
       remove_counting()
       var rand = Math.floor(Math.random()*cleannames.length);
@@ -459,14 +459,14 @@ function remove_counting() {
 //       document.getElementById('ResultBox').value = namepool.join('\n');
 //     }
 //   } else {
-//     // al_ert("woah, woah, woah, stop right there dude!")
+//     // al_ert"woah, woah, woah, stop right there dude!")
 // }
 
 //   if (maxname >= ppl) {
 //     if (ppl > 1) {
 //       if (grp > 1) {
 //         var grp_auto = Math.round(namelist.length / grp)
-//         // al_ert(namelist.length / grp)
+//         // al_ertnamelist.length / grp)
 //         var grppool = []
 //         for (var x = 1; x <= grp; x++) {
 //           var namepool = []
@@ -509,6 +509,6 @@ function remove_counting() {
 //       document.getElementById('ResultBox').value = pickedname;
 //     }
 //   } else {
-//     // al_ert("dude, pls count, okay!")
+//     // al_ert"dude, pls count, okay!")
 //   }
  // }
