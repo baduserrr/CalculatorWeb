@@ -53,60 +53,62 @@
           <!-- Name Picker Tab -->
           <div class="tab-pane fade show active" id="nav-name" role="tabpanel" aria-labelledby="nav-name-tab">
             <form class="row m-2">
-              <!-- Name Input -->
-              <div class="col">
-                <label for="NamesV" class="form-label"><b>Names</b></label>
-                <textarea id="namesv" class="form-control" placeholder="Asbun&#10;Badu&#10;Malkovich&#10;Putin" rows="15"></textarea>
-              </div>
-              <!-- Option Setting -->
-              <div class="col">
-                <p class="mb-2"><b>Options</b></p>
-                <div class="row">
-                  <div class="col mb-3">
-                    <div class="form-check form-check-inline form-switch">
-                      <input id="group_ck" class="form-check-input" type="checkbox" >
-                      <label class="form-check-label" for="includegroup">Enable groups</label>
-                    </div>
-                    <div class="form-check form-check-inline form-switch">
-                      <input id="uneven_ck" class="form-check-input" type="checkbox">
-                      <label class="form-check-label" for="countsbygroup">Uneven groups</label>
-                    </div>
-                  </div>
+              <div class="row row-cols-lg-3 row-cols-md-1 row-cols-sm-1 row-cols-xs-1">
+                <!-- Name Input -->
+                <div class="col">
+                  <label for="NamesV" class="form-label"><b>Names</b></label>
+                  <textarea id="namesv" class="form-control" placeholder="Asbun&#10;Badu&#10;Malkovich&#10;Putin" rows="15"></textarea>
                 </div>
-                <div class="row">
-                  <!-- Default Option -->
-                  <div class="col" id="def_opt">
-                    <div class="form-floating mb-3">
-                      <input id="groupv" class="form-control" type="text" placeholder="Insert number of desired groups" disabled>
-                      <label for="groupv">Number Of Groups</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input id="peoplev" class="form-control" type="text" placeholder="Insert number of desired peoples">
-                      <label for="peoplev">Number Of Peoples</label>
-                    </div>
-                  </div>
-                  <!-- Uneven Option -->
-                  <div class="col" id="uneven_opt" style="display:none;">
-                    <div class="row">
-                      <div class="col">
-                        <div class="input-group input-group-sm mb-3">
-                          <span class="input-group-text">How many groups</span>
-                          <input id="uneven_grp" type="text" class="form-control" placeholder="# groups" aria-label="# groups">
-                        </div>
+                <!-- Option Setting -->
+                <div class="col">
+                  <p class="mb-2"><b>Options</b></p>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <div class="form-check form-check-inline form-switch">
+                        <input id="group_ck" class="form-check-input" type="checkbox" >
+                        <label class="form-check-label" for="includegroup">Enable groups</label>
+                      </div>
+                      <div class="form-check form-check-inline form-switch">
+                        <input id="uneven_ck" class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="countsbygroup">Uneven groups</label>
                       </div>
                     </div>
-                    <div class="row" id="dyn_uneven"></div>
+                  </div>
+                  <div class="row">
+                    <!-- Default Option -->
+                    <div class="col" id="def_opt">
+                      <div class="form-floating mb-3">
+                        <input id="groupv" class="form-control" type="text" placeholder="Insert number of desired groups" disabled>
+                        <label for="groupv">Number Of Groups</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input id="peoplev" class="form-control" type="text" placeholder="Insert number of desired peoples">
+                        <label for="peoplev">Number Of Peoples</label>
+                      </div>
+                    </div>
+                    <!-- Uneven Option -->
+                    <div class="col" id="uneven_opt" style="display:none;">
+                      <div class="row">
+                        <div class="col">
+                          <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">How many groups</span>
+                            <input id="uneven_grp" type="text" class="form-control" placeholder="# groups" aria-label="# groups">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" id="dyn_uneven"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- Result -->
-              <div class="col-4">
-                <label for="Result" class="form-label"><b>Result</b></label>
-                <div class="card bg-abitdark h-100">
-                  <div id="ResultBox" class="card-body pt-2 pl-0"></div>
-                  <div class="card-footer d-grid d-md-flex gap-1 justify-content-md-center">
-                    <button onclick="counting()" type="button" class="btn btn-success">Start</button>
-                    <button type="button" class="btn btn-danger">Reset</button>
+                <!-- Result -->
+                <div class="col">
+                  <label for="Result" class="form-label"><b>Result</b></label>
+                  <div class="card bg-abitdark h-100">
+                    <div id="ResultBox" class="card-body pt-2 pl-0"></div>
+                    <div class="card-footer d-grid d-md-flex gap-1 justify-content-md-center">
+                      <button onclick="counting()" type="button" class="btn btn-success">Start</button>
+                      <button type="button" class="btn btn-danger">Reset</button>
+                    </div>
                   </div>
                 </div>
               </div>
