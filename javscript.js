@@ -1,4 +1,16 @@
-$('#namesv').val('Asbun\nBadu\nMalkovich\nPutin\nBambamng\nMangkir\nBirat\nManjula\nArchie\nEmmalyn\nAldona\nKısmet\nPrzemysł\nJemima\nCarina')
+// $('#namesv').val('Asbun\nBadu\nMalkovich\nPutin\nBambamng\nMangkir\nBirat\nManjula\nArchie\nEmmalyn\nAldona\nKısmet\nPrzemysł\nJemima\nCarina')
+
+function clipboard_copy() {
+  var copyTextarea = document.createElement("input");
+  copyText = (document.getElementById("ResultBox").innerText);
+  copyTextarea.value = copyText
+  document.body.appendChild(copyTextarea);
+  // console.lo_g(copyTextarea);
+  copyTextarea.select();
+  copyTextarea.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(copyTextarea);
+}
 
 $('#group_ck').on('change', function() {
   if (document.getElementById('group_ck').checked) {
@@ -38,7 +50,7 @@ $('#uneven_ck').on('change', function() {
 // trying to generate groups as many group size value
 function generate_input() {
   var grp = $('#uneven_grp').val();
-  if (grp > 1) {
+  if (grp >= 1) {
     for (var inp_p = 1; inp_p <= grp; inp_p++) {
       var divtmp = document.createElement("div");
       var spantmp = document.createElement("span");
@@ -51,7 +63,7 @@ function generate_input() {
       var inputid = ("grp_sm_" + inp_p);
       inputtmp.id = (inputid)
       inputtmp.className = ("form-control");
-      inputtmp.type = ("text");
+      inputtmp.type = ("number");
       inputtmp.placeholder = ("# peoples in group");
       inputtmp.arialabel = ("# peoples in group");
 
@@ -83,8 +95,48 @@ function counting() {
 
   if (document.getElementById('uneven_ck').checked) {
     cntmode = 5
-    // al_ert'mode = ' + cntmode)
+    // ale_rt('mode = ' + cntmode)
     // this one is for uneven groups
+    remove_counting()
+    var grp_auto = $('#uneven_grp').val()
+    var ctr = 0
+    var people_in_groups = []
+    var allppl = 0
+
+    for (var xa = 0; xa <= grp_auto; xa++) {
+      var jdl = ('#grp_sm_' + (xa+1));
+      ads = Number($(jdl).val())
+      allppl = allppl + ads
+      if (maxname >= allppl) {
+        people_in_groups.push(ads-1)
+      } else {
+        people_in_groups.push((ads-1) - (allppl - maxname))
+      }
+    }
+
+    for (var x = 0; x < grp_auto; x++) {
+      var lbltmp = document.createElement("label");
+      lbltmp.innerHTML = ('<b>Group ' + (x + 1) + '</b>');
+      lbltmp.className = ('p-2 pt-0 pb-0');
+      var namepool = []
+
+      for (var b = people_in_groups[ctr]; b >= 0; b--) {
+        // console.lo_g('people in groups = ' + people_in_groups[ctr]);
+        var rand = Math.floor(Math.random()*cleannames.length);
+        var pickedname = cleannames[rand]
+        namepool.push('<li>' + pickedname + '</li>')
+        cleannames.splice(rand, 1);
+        var oltmp = document.createElement("ol");
+        oltmp.innerHTML = (namepool.join('\n'));
+      }
+      ctr = ctr + 1
+      // console.lo_g('counter ' + ctr);
+      // console.lo_g(namepool);
+      // console.lo_g("Ini Team " + (x + 1) + " " + namepool);
+
+      document.getElementById('ResultBox').appendChild(lbltmp);
+      document.getElementById('ResultBox').appendChild(oltmp);
+    }
     // ======================================================================
   } else {
     if (ppl >= 1) {
@@ -99,7 +151,7 @@ function counting() {
         //   if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
         //     var ads = 0
         //     var leftover = (grp_auto * ppl) - maxname
-        //     // al_ert'remove ' + leftover + ' person')
+        //     // ale_rt('remove ' + leftover + ' person')
         //     for (var xxx = 0; xxx < leftover; xxx++) {
         //       if (leftover >= 1) {
         //         for (var xx = 0; xx < grp_auto; xx++) {
@@ -107,27 +159,27 @@ function counting() {
         //             ads = ads + 1
         //             people_in_groups.push((ppl-1) - ads)
         //             leftover = leftover - 1
-        //             console.log('leftover to remove ' + leftover);
+        //             // console.lo_g('leftover to remove ' + leftover);
         //           } else {
         //             people_in_groups.push(ppl-1)
         //           }
         //         }
         //       } else {
-        //         console.log('leftover to remove2 ' + leftover);
+        //         // console.lo_g('leftover to remove2 ' + leftover);
         //       }
         //       people_in_groups.reverse()
         //     }
         //   } else {
         //     var ads = 0
         //     var leftover = maxname - (grp_auto * ppl)
-        //     // al_ert'add ' + leftover + ' person')
+        //     // ale_rt('add ' + leftover + ' person')
         //     for (var xxx = 0; xxx < leftover; xxx++) {
         //       for (var xx = 0; xx < grp_auto; xx++) {
         //         if (leftover >= 1) {
         //           ads = ads + 1
         //           people_in_groups.push((ppl-1) + ads)
         //           leftover = leftover - 1
-        //           console.log('leftover to add ' + leftover);
+        //           // console.lo_g('leftover to add ' + leftover);
         //         } else {
         //           people_in_groups.push(ppl-1)
         //         }
@@ -143,20 +195,20 @@ function counting() {
         //     var namepool = []
         //
         //     for (var b = people_in_groups[ctr]; b >= 0; b--) {
-        //       console.log('people in groups = ' + people_in_groups[ctr]);
+        //       // console.lo_g('people in groups = ' + people_in_groups[ctr]);
         //       var rand = Math.floor(Math.random()*cleannames.length);
         //       var pickedname = cleannames[rand]
         //       namepool.push('<li>' + pickedname + '</li>')
         //       cleannames.splice(rand, 1);
-        //       // console.log('sisa ' + cleannames);
+        //       // // console.lo_g('sisa ' + cleannames);
         //
         //       var oltmp = document.createElement("ol");
         //       oltmp.innerHTML = (namepool.join('\n'));
         //     }
         //     ctr = ctr + 1
-        //     console.log('counter ' + ctr);
-        //     console.log(namepool);
-        //     console.log("Ini Team " + (x + 1) + " " + namepool);
+        //     // console.lo_g('counter ' + ctr);
+        //     // console.lo_g(namepool);
+        //     // console.lo_g("Ini Team " + (x + 1) + " " + namepool);
         //
         //     document.getElementById('ResultBox').appendChild(lbltmp);
         //     document.getElementById('ResultBox').appendChild(oltmp);
@@ -183,10 +235,10 @@ function counting() {
         // }
         // ======================================================================
         cntmode = 3
-        // al_ert'mode = ' + cntmode)
+        // ale_rt('mode = ' + cntmode)
       } else {
         cntmode = 1
-        // al_ert'mode = ' + cntmode)
+        // ale_rt('mode = ' + cntmode)
         // this one is for people only
         if (maxname > ppl) {
           remove_counting()
@@ -197,7 +249,7 @@ function counting() {
           if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
             var ads = 0
             var leftover = (grp_auto * ppl) - maxname
-            // al_ert'remove ' + leftover + ' person')
+            // ale_rt('remove ' + leftover + ' person')
             for (var xxx = 0; xxx < leftover; xxx++) {
               ads = ads + 1
               var namesum = maxname
@@ -205,12 +257,12 @@ function counting() {
                 if ((leftover >= 1) && (((ppl-1) - ads) >= (ppl-1))) {
                   people_in_groups.push((ppl-1) - ads)
                   leftover = leftover - 1
-                  console.log('leftover to remove ' + leftover);
+                  // console.lo_g('leftover to remove ' + leftover);
                 } else {
                   if (ppl < namesum) {
                     people_in_groups.push(ppl-1)
                     namesum = (namesum - ppl)
-                    console.log('namesum ' + namesum);
+                    // console.lo_g('namesum ' + namesum);
                   } else {
                     people_in_groups.push(namesum-1)
                     people_in_groups.reverse()
@@ -227,19 +279,19 @@ function counting() {
             var ads = 0
             var leftover = maxname - (grp_auto * ppl)
             grp_auto = grp_auto + 1
-            // al_ert'add ' + leftover + ' person')
+            // ale_rt('add ' + leftover + ' person')
             for (var xxx = 0; xxx < leftover; xxx++) {
               ads = ads + 1
               var namesum = maxname
               for (var xx = 0; xx < grp_auto; xx++) {
-                console.log(grp_auto);
+                // console.lo_g(grp_auto);
                 if ((leftover >= 1) && (((ppl-1) + ads) <= (ppl-1))) {
                   people_in_groups.push((ppl-1) + ads)
                   leftover = leftover - 1
-                  console.log('leftover to add ' + leftover);
+                  // console.lo_g('leftover to add ' + leftover);
                 } else {
                   if (ppl < namesum) {
-                    console.log('namesum3 ' + namesum);
+                    // console.lo_g('namesum3 ' + namesum);
                     people_in_groups.push(ppl-1)
                     namesum = (namesum - ppl)
                   } else {
@@ -259,20 +311,20 @@ function counting() {
             var namepool = []
 
             for (var b = people_in_groups[ctr]; b >= 0; b--) {
-              console.log('people in groups = ' + people_in_groups[ctr]);
+              // console.lo_g('people in groups = ' + people_in_groups[ctr]);
               var rand = Math.floor(Math.random()*cleannames.length);
               var pickedname = cleannames[rand]
               namepool.push('<li>' + pickedname + '</li>')
               cleannames.splice(rand, 1);
-              // console.log('sisa ' + cleannames);
+              // // console.lo_g('sisa ' + cleannames);
 
               var oltmp = document.createElement("ol");
               oltmp.innerHTML = (namepool.join('\n'));
             }
             ctr = ctr + 1
-            console.log('counter ' + ctr);
-            console.log(namepool);
-            console.log("Ini Team " + (x + 1) + " " + namepool);
+            // console.lo_g('counter ' + ctr);
+            // console.lo_g(namepool);
+            // console.lo_g("Ini Team " + (x + 1) + " " + namepool);
 
             document.getElementById('ResultBox').appendChild(lbltmp);
             document.getElementById('ResultBox').appendChild(oltmp);
@@ -301,20 +353,27 @@ function counting() {
       }
     } else if (grp >= 1 && grp != "") {
       cntmode = 2
-      // al_ert'mode = ' + cntmode)
+      // ale_rt('mode = ' + cntmode)
       // this one is for group only
       if (maxname > grp) {
         remove_counting()
         var ppl = Math.round(maxname / grp)
+        // console.lo_g(maxname / grp);
         var grp_auto = grp
-        console.log(grp_auto + ' group with ' + ppl + ' people');
+        // console.lo_g(grp_auto + ' group with ' + ppl + ' people');
         var ctr = 0
         var people_in_groups = []
+
+        var leftover = (grp_auto * ppl) - maxname
+        if (leftover >= ppl) {
+          ppl = ppl - 1
+          // console.lo_g('ppl = ' + ppl);
+        }
 
         if ((grp_auto * ppl) > maxname && (grp_auto * ppl) != maxname) {
           var ads = 0
           var leftover = (grp_auto * ppl) - maxname
-          // al_ert'remove ' + leftover + ' person')
+          // ale_rt('remove ' + leftover + ' person')
           for (var xxx = 0; xxx < leftover; xxx++) {
             ads = ads + 1
             var namesum = maxname
@@ -322,12 +381,13 @@ function counting() {
               if ((leftover >= 1) && (((ppl-1) - ads) >= (ppl-1))) {
                 people_in_groups.push((ppl-1) - ads)
                 leftover = leftover - 1
-                console.log('leftover to remove ' + leftover);
+                // console.lo_g('leftover to remove ' + leftover);
               } else {
                 if (ppl < namesum) {
                   people_in_groups.push(ppl-1)
                   namesum = (namesum - ppl)
-                  console.log('namesum ' + namesum);
+                  // console.lo_g('namesum ' + namesum);
+                  // console.lo_g(people_in_groups);
                 } else {
                   people_in_groups.push(namesum-1)
                   people_in_groups.reverse()
@@ -343,28 +403,20 @@ function counting() {
         } else {
           var ads = 0
           var leftover = maxname - (grp_auto * ppl)
-          // al_ert'add ' + leftover + ' person')
+          // ale_rt('add ' + leftover + ' person')
           for (var xxx = 0; xxx < leftover; xxx++) {
             ads = ads + 1
             var namesum = maxname
             for (var xx = 0; xx < grp_auto; xx++) {
-              console.log(grp_auto);
-              if ((leftover >= 1) && (((ppl-1) + ads) <= (ppl-1))) {
+              // console.lo_g(grp_auto);
+              if (leftover >= 1) {
                 people_in_groups.push((ppl-1) + ads)
                 leftover = leftover - 1
-                console.log('leftover to add ' + leftover);
+                // console.lo_g('leftover to add ' + leftover);
               } else {
-                if (ppl < namesum) {
-                  console.log('namesum3 ' + namesum);
-                  people_in_groups.push(ppl-1)
-                  namesum = (namesum - ppl)
-                } else {
-                  people_in_groups.push(namesum-1)
-                  people_in_groups.reverse()
-                }
+                people_in_groups.push(ppl-1)
               }
             }
-            people_in_groups.reverse()
           }
         }
 
@@ -375,20 +427,18 @@ function counting() {
           var namepool = []
 
           for (var b = people_in_groups[ctr]; b >= 0; b--) {
-            console.log('people in groups = ' + people_in_groups[ctr]);
+            // console.lo_g('people in groups = ' + people_in_groups[ctr]);
             var rand = Math.floor(Math.random()*cleannames.length);
             var pickedname = cleannames[rand]
             namepool.push('<li>' + pickedname + '</li>')
             cleannames.splice(rand, 1);
-            // console.log('sisa ' + cleannames);
-
             var oltmp = document.createElement("ol");
             oltmp.innerHTML = (namepool.join('\n'));
           }
           ctr = ctr + 1
-          console.log('counter ' + ctr);
-          console.log(namepool);
-          console.log("Ini Team " + (x + 1) + " " + namepool);
+          // console.lo_g('counter ' + ctr);
+          // console.lo_g(namepool);
+          // console.lo_g("Ini Team " + (x + 1) + " " + namepool);
 
           document.getElementById('ResultBox').appendChild(lbltmp);
           document.getElementById('ResultBox').appendChild(oltmp);
@@ -416,7 +466,7 @@ function counting() {
       // ======================================================================
     } else {
       cntmode = 4
-      // al_ert'mode = ' + cntmode)
+      // ale_rt('mode = ' + cntmode)
       // this one is for if both group and people has no value
       remove_counting()
       var rand = Math.floor(Math.random()*cleannames.length);
@@ -427,7 +477,7 @@ function counting() {
       lbltmp.innerHTML = ('<b>Group 1</b>');
       lbltmp.className = ('p-2 pt-0 pb-0');
       litmp.innerHTML = (pickedname);
-      console.log(cleannames);
+      // console.lo_g(cleannames);
       document.getElementById('ResultBox').appendChild(lbltmp);
       document.getElementById('ResultBox').appendChild(oltmp);
       oltmp.appendChild(litmp);
@@ -447,49 +497,49 @@ function remove_counting() {
 }
 
 
-//     console.log(people_in_groups);
+//     // console.lo_g(people_in_groups);
 //     var namepool = []
 //     for (var i = ppl-1; i >= 0; i--) {
 //       var rand = Math.floor(Math.random()*cleannames.length);
 //       var pickedname = cleannames[rand]
 //       namepool.push(pickedname)
 //       cleannames.splice(rand, 1);
-//       console.log(cleannames);
-//       console.log(namepool);
+//       // console.lo_g(cleannames);
+//       // console.lo_g(namepool);
 //       document.getElementById('ResultBox').value = namepool.join('\n');
 //     }
 //   } else {
-//     // al_ert"woah, woah, woah, stop right there dude!")
+//     // ale_rt("woah, woah, woah, stop right there dude!")
 // }
 
 //   if (maxname >= ppl) {
 //     if (ppl > 1) {
 //       if (grp > 1) {
 //         var grp_auto = Math.round(namelist.length / grp)
-//         // al_ertnamelist.length / grp)
+//         // ale_rt(namelist.length / grp)
 //         var grppool = []
 //         for (var x = 1; x <= grp; x++) {
 //           var namepool = []
-//           console.log(x);
+//           // console.lo_g(x);
 //           for (var b = grp_auto-1; b >= 0; b--) {
-//             console.log("team " + b + " " + grp_auto);
+//             // console.lo_g("team " + b + " " + grp_auto);
 //             var rand = Math.floor(Math.random()*cleannames.length);
 //             var pickedname = cleannames[rand]
 //             namepool.push(pickedname);
 //             cleannames.splice(rand, 1);
-//             console.log(cleannames);
+//             // console.lo_g(cleannames);
 //           }
 //           if (grp_auto > cleannames.length) {
 //             grp_auto = maxname - grp_auto
 //           } else {
 //             var rand = Math.floor(Math.random()*cleannames.length);
-//             console.log('sisa cleannames' + x + grp + cleannames);
+//             // console.lo_g('sisa cleannames' + x + grp + cleannames);
 //             var pickedname = cleannames[rand];
 //             namepool.push(pickedname);
 //           }
-//           console.log(namepool);
+//           // console.lo_g(namepool);
 //           grppool[x] = namepool
-//           console.log("Ini Team " + x + " " + grppool[x]);
+//           // console.lo_g("Ini Team " + x + " " + grppool[x]);
 //         }
 //       } else {
 //         var namepool = []
@@ -498,8 +548,8 @@ function remove_counting() {
 //           var pickedname = cleannames[rand]
 //           namepool.push(pickedname)
 //           cleannames.splice(rand, 1);
-//           console.log(cleannames);
-//           console.log(namepool);
+//           // console.lo_g(cleannames);
+//           // console.lo_g(namepool);
 //           document.getElementById('ResultBox').value = namepool.join('\n');
 //         }
 //       }
@@ -509,6 +559,6 @@ function remove_counting() {
 //       document.getElementById('ResultBox').value = pickedname;
 //     }
 //   } else {
-//     // al_ert"dude, pls count, okay!")
+//     // ale_rt("dude, pls count, okay!")
 //   }
  // }
