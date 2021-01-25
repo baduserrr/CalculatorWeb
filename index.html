@@ -22,6 +22,13 @@
       .borderfix {
         border-radius: 35px;
       }
+      .hide {
+        display: none;
+      }
+      .scrollable {
+        overflow-y: scroll;
+        height: 330px;
+      }
     </style>
   </head>
   <body class="bg-light text-dark">
@@ -53,19 +60,30 @@
         <div class="tab-content" id="nav-tabContent">
           <!-- Home Tab -->
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div style="height:200px"></div>
-            <div class="col d-grid d-md-flex gap-3 justify-content-md-evenly">
-              <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
-              <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
+            <div class="row">
+              <div style="height:200px"></div>
+              <div class="col d-grid d-md-flex gap-3 justify-content-md-evenly">
+                <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
+                <button type="button" class="btn btn-dark btn-lg"><img class="w-xl" src=imgs/logo.png></button>
+              </div>
             </div>
           </div>
           <!-- Name Picker Tab -->
           <div class="tab-pane fade" id="nav-name" role="tabpanel" aria-labelledby="nav-name-tab">
-            <div class="row row-cols-lg-3 row-cols-md-1">
+            <div id="alert_ph" class="toast-container position-absolute pt-2 top-25 start-50 translate-middle">
+              <div class="toast d-flex align-items-center bg-danger text-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="toast-body">
+                  We do some improvisation, please check!
+                </div>
+                <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+            <div style="height:2em"></div>
+            <div class="row row-cols-lg-3 row-cols-md-1 p-3">
               <!-- Name Input -->
-              <div class="col-lg-4 mb-3 h-100">
+              <div class="col-lg-4 mb-3">
                 <label for="NamesV" class="form-label"><b>Names</b></label>
-                <textarea id="namesv" class="form-control" placeholder="Asbun&#10;Badu&#10;Malkovich&#10;Putin" rows="15"></textarea>
+                <textarea id="namesv" class="form-control" placeholder="Your Name&#10;Your friends Name&#10;Her name&#10;His name" rows="17"></textarea>
               </div>
               <!-- Option Setting -->
               <div class="col-lg-4">
@@ -74,28 +92,52 @@
                   <div class="col mb-3">
                     <div class="form-check form-check-inline form-switch">
                       <input id="group_ck" class="form-check-input" type="checkbox" >
-                      <label class="form-check-label" for="includegroup">Split by group</label>
+                      <label class="form-check-label" for="includegroup">Group mode</label>
                     </div>
                     <div class="form-check form-check-inline form-switch">
-                      <input id="uneven_ck" class="form-check-input" type="checkbox">
+                      <input id="uneven_ck" class="form-check-input" type="checkbox" disabled>
                       <label class="form-check-label" for="countsbygroup">Uneven group</label>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <!-- Default Option -->
-                  <div class="col" id="def_opt">
+                  <!-- Winner Option -->
+                  <div class="col" id="win_opt">
                     <div class="form-floating mb-3">
-                      <input id="groupv" class="form-control" type="number" placeholder="Insert number of desired groups" disabled>
-                      <label for="groupv">Number of groups</label>
+                      <input id="winnerv" class="form-control" type="number" placeholder="Insert number of desired peoples">
+                      <label for="winnerv">Number of peoples</label>
                     </div>
-                    <div class="form-floating mb-3">
-                      <input id="peoplev" class="form-control" type="number" placeholder="Insert number of desired peoples">
-                      <label for="peoplev">Number of peoples</label>
+                  </div>
+                  <!-- Default Option -->
+                  <div class="col hide" id="def_opt">
+                    <div class="row">
+                      <div class="col-1">
+                        <div class="input-group" style="height:3.6em">
+                          <span class="input-group-text">
+                            <input id="group_rd" class="form-check-input" type="radio" name="GroupRadio" value="option1">
+                          </span>
+                        </div>
+                        <div style="height:1.04em"></div>
+                        <div class="input-group" style="height:3.6em">
+                          <span class="input-group-text">
+                            <input id="people_rd" class="form-check-input" type="radio" name="PeopleRadio" value="option2" checked>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating mb-3">
+                          <input id="groupv" class="form-control" type="number" placeholder="Insert number of desired groups" disabled>
+                          <label for="groupv">Number of groups</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input id="peoplev" class="form-control" type="number" placeholder="Insert number of desired peoples">
+                          <label for="peoplev">Number of peoples</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- Uneven Option -->
-                  <div class="col" id="uneven_opt" style="display:none;">
+                  <div class="col hide" id="uneven_opt">
                     <div class="row">
                       <div class="col">
                         <div class="input-group input-group-sm mb-3">
@@ -104,7 +146,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row" id="dyn_uneven"></div>
+                    <div class="row scrollable p-1" id="dyn_uneven"></div>
                   </div>
                 </div>
               </div>
@@ -113,17 +155,21 @@
                 <label for="Result" class="form-label"><b>Result</b></label>
                 <div class="card bg-warna1 h-100">
                   <div class="card-header bg-warna2 d-grid d-md-flex gap-2 justify-content-md-center">
-                    <button onclick="counting()" type="button" class="btn btn-success">Start</button>
-                    <button onclick="remove_counting()" type="button" class="btn btn-danger">Reset</button>
-                    <button onclick="clipboard_copy()" type="button" class="btn btn-warning" disabled>Copy</button>
+                    <button onclick="NP_Main()" type="button" class="btn btn-success">Start</button>
+                    <button onclick="NP_clear_result()" type="button" class="btn btn-danger">Reset</button>
+                    <button onclick="NP_clipboard_copy()" type="button" class="btn btn-warning" disabled>Copy</button>
                   </div>
-                  <div id="ResultBox" class="card-body pt-2 pl-0"></div>
+                  <div id="ResultBox" class="card-body pt-2 pl-0 scrollable"></div>
                 </div>
               </div>
             </div>
           </div>
           <!-- Aspect Ratio Tab -->
-          <div class="tab-pane fade" id="nav-aspect" role="tabpanel" aria-labelledby="nav-aspect-tab">P</div>
+          <div class="tab-pane fade" id="nav-aspect" role="tabpanel" aria-labelledby="nav-aspect-tab">
+            <div class="row">
+
+            </div>
+          </div>
         </div>
       </div>
       <!-- Content -->
